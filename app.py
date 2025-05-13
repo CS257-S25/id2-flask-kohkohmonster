@@ -1,12 +1,14 @@
-from flask import Flask
-from ProductionCode import most_banned
-from ProductionCode import search
 '''
 This code is a Flask application that serves as a web interface for
  the most_banned books as well as its statistics.
 It allows users to select a type of data 
 (author, title, district, or state) and the number of items to display.
 '''
+
+from flask import Flask
+from ProductionCode import most_banned
+from ProductionCode import search
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -78,5 +80,4 @@ def search_genre(genre):
 
     # This grabs the books of the genre.
     matching_books = search.search_genre(genre)
-
-
+    
