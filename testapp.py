@@ -1,4 +1,4 @@
-from app import *
+from id2-flask-kohkohmonster.app import *
 import unittest
 
 class TestApp(unittest.TestCase):
