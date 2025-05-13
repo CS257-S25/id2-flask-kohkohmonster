@@ -2,8 +2,10 @@ from flask import Flask
 from ProductionCode import most_banned
 from ProductionCode import search
 '''
-This code is a Flask application that serves as a web interface for the most_banned books as well as its statistics.
-It allows users to select a type of data (author, title, district, or state) and the number of items to display.
+This code is a Flask application that serves as a web interface for
+ the most_banned books as well as its statistics.
+It allows users to select a type of data 
+(author, title, district, or state) and the number of items to display.
 '''
 app = Flask(__name__)
 
@@ -12,7 +14,8 @@ def homepage():
     '''
     This is the homepage where the user can select a link to another webpage.
     '''
-    return_statement = "Enter the URL /most_banned/<type>/<num> to see the most banned books of a certain type." \
+    return_statement = "Enter the URL /most_banned/<type>/<num>"
+    +"to see the most banned books of a certain type." \
     +"\nA type is one of the following categories: author, title, district, or state." \
     +"\nA num is a number that represents how many of that type one wants to see." \
     +"\nFor example, /most_banned/author/5 will show the 5 most banned authors." \
