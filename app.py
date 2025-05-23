@@ -35,29 +35,22 @@ def most_banned_category(type, num):
     # This checks if the type is a string and the number is an integer greater than 0.
     if number < 1:
         return "Please enter a number greater than 0."
-    
     # This grabs the author with the most banned books.
     if type == "author":
         most_banned_type = most_banned.most_banned_authors(number)
-    
     # This grabs the title with the most banned books.
     elif type == "title":
         most_banned_type = most_banned.most_banned_titles(number)
-
     # This grabs the district with the most banned books.
     elif type == "district":
         most_banned_type = most_banned.most_banned_districts(number)
-
     # This grabs the state with the most banned books.
     elif type == "state":
         most_banned_type = most_banned.most_banned_states(number)
-
     # This is the default case if the type is not one of the above.
     else:
         return "Please enter a valid type: author, title, district, or state."
-    
     return most_banned_type
-
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
 
@@ -81,4 +74,3 @@ def search_genre(genre):
 
     # This grabs the books of the genre.
     matching_books = search.search_genre(genre)
-    
