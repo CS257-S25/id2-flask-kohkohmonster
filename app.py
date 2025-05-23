@@ -63,11 +63,9 @@ def search_genre(genre):
     # This checks if the genre is a string.
     if not isinstance(genre, str):
         return "Please enter a valid genre."
-    
     # This checks if the genre is empty.
     if genre == "":
         return "Please enter a valid genre."
-    
     # This checks if the genre is a string and the number is an integer greater than 0.
     if genre.isdigit():
         return "Please enter a valid genre."
