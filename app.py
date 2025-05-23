@@ -25,8 +25,8 @@ def homepage():
 
     return return_statement
 
-@app.route('/most_banned/<type>/<num>')
-def most_banned_category(type, num):
+@app.route('/most_banned/<category>/<num>')
+def most_banned_category(category, num):
     '''
     This function takes in a type and a number and returns the most banned books of that type.
     '''
@@ -36,16 +36,16 @@ def most_banned_category(type, num):
     if number < 1:
         return "Please enter a number greater than 0."
     # This grabs the author with the most banned books.
-    if type == "author":
+    if category == "author":
         most_banned_type = most_banned.most_banned_authors(number)
     # This grabs the title with the most banned books.
-    elif type == "title":
+    elif category == "title":
         most_banned_type = most_banned.most_banned_titles(number)
     # This grabs the district with the most banned books.
-    elif type == "district":
+    elif category == "district":
         most_banned_type = most_banned.most_banned_districts(number)
     # This grabs the state with the most banned books.
-    elif type == "state":
+    elif category == "state":
         most_banned_type = most_banned.most_banned_states(number)
     # This is the default case if the type is not one of the above.
     else:
@@ -72,3 +72,4 @@ def search_genre(genre):
 
     # This grabs the books of the genre.
     matching_books = search.search_genre(genre)
+    return matching_books
