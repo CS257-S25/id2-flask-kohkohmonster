@@ -5,7 +5,8 @@ class TestApp(unittest.TestCase):
     def test_homepage(self):
         self.app = app.test_client()
         response = self.app.get('/', follow_redirects=True)
-        return_statement = "Enter the URL /most_banned/<type>/<num> to see the most banned books of a certain type."
+        return_statement = "Enter the URL /most_banned/<type>/<num>"
+        +"\n to see the most banned books of a certain type."
         +"\nA type is one of the following categories: author, title, district, or state."
         +"\nA num is a number that represents how many of that type one wants to see."
         +"\nFor example, /most_banned/author/5 will show the 5 most banned authors."
@@ -15,7 +16,8 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned authors
-        This function takes in an author name and a number and returns the most banned books of that author.
+        This function takes in an author name and a number and returns
+        the most banned books of that author.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/5', follow_redirects=True)
@@ -25,7 +27,8 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned titles
-        This function takes in a title name and a number and returns the most banned books of that title.
+        This function takes in a title name and a number and returns
+        the most banned books of that title.
         '''
 
         self.app = app.test_client()
@@ -36,7 +39,8 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned districts
-        This function takes in a district name and a number and returns the district with the most banned books.
+        This function takes in a district name and a number and returns
+        the district with the most banned books.
         '''
 
         self.app = app.test_client()
@@ -47,7 +51,8 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned states
-        This function takes in a state name and a number and returns the state with the most banned books.
+        This function takes in a state name and a number and returns
+        the state with the most banned books.
         '''
 
         self.app = app.test_client()
@@ -58,18 +63,23 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/invalid/5', follow_redirects=True)
-        self.assertIn(b'Please enter a valid type: author, title, district, or state.', response.data)
+        self.assertIn(b'Please enter a valid type: author, title, district, or state.',
+                      response.data)
 
     def test_invalid_number(self):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and
+        returns the most banned books of that type. 
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -80,7 +90,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type. 
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -91,7 +103,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -102,7 +116,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -113,7 +129,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -124,7 +142,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and
+        returns the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -135,7 +155,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and
+        returns the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -146,7 +168,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
 
         self.app = app.test_client()
@@ -157,7 +181,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/nan', follow_redirects=True)
@@ -167,7 +193,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/infinity', follow_redirects=True)
@@ -177,7 +205,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/-infinity', follow_redirects=True)
@@ -187,7 +217,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/+infinity', follow_redirects=True)
@@ -196,7 +228,9 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/-+infinity', follow_redirects=True)
@@ -205,11 +239,10 @@ class TestApp(unittest.TestCase):
         '''
         Arguments: none
         Returns: a list of the most banned books
-        This function takes in a type and a number and returns the most banned books of that type. This is meant to be an edge case.
+        This function takes in a type and a number and
+        returns the most banned books of that type.
+        This is meant to be an edge case.
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/+-infinity', follow_redirects=True)
         self.assertIn(b'Please enter a number greater than 0.', response.data)
-
-        #How do I get flask to run? I keep receiving error 404. If my group is unable to help, ask Anya during office hours tomorrow (13:30-14:30).
-        #Also, for homework one, how do I call the production code to test?
