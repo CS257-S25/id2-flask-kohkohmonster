@@ -16,16 +16,17 @@ def homepage():
     '''
     This is the homepage where the user can select a link to another webpage.
     '''
-    return_statement = "Enter the URL /most_banned/<type>/<num>"
-    +"to see the most banned books of a certain type." \
-    +"\nA type is one of the following categories: author, title, district, or state." \
-    +"\nA num is a number that represents how many of that type one wants to see." \
-    +"\nFor example, /most_banned/author/5 will show the 5 most banned authors." \
+    one = "Enter the URL /most_banned/<type>/<num>"
+    two = "\nto see the most banned books of a certain type."
+    three = "\nA type is one of the following categories: author, title, district, or state."
+    four = "\nA num is a number that represents how many of that type one wants to see."
+    five = "\nFor example, /most_banned/author/5 will show the 5 most banned authors."
+    return_statement = one + two + three + four + five
 
     return return_statement
 
 @app.route('/most_banned/<type>/<num>')
-def most_banned(type, num):
+def most_banned_category(type, num):
     '''
     This function takes in a type and a number and returns the most banned books of that type.
     '''
@@ -37,28 +38,28 @@ def most_banned(type, num):
     
     # This grabs the author with the most banned books.
     if type == "author":
-        most_banned = most_banned.most_banned_authors(number)
+        most_banned_type = most_banned.most_banned_authors(number)
     
     # This grabs the title with the most banned books.
     elif type == "title":
-        most_banned = most_banned.most_banned_titles(number)
+        most_banned_type = most_banned.most_banned_titles(number)
 
     # This grabs the district with the most banned books.
     elif type == "district":
-        most_banned = most_banned.most_banned_districts(number)
+        most_banned_type = most_banned.most_banned_districts(number)
 
     # This grabs the state with the most banned books.
     elif type == "state":
-        most_banned = most_banned.most_banned_states(number)
+        most_banned_type = most_banned.most_banned_states(number)
 
     # This is the default case if the type is not one of the above.
     else:
         return "Please enter a valid type: author, title, district, or state."
     
-    return most_banned
+    return most_banned_type
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="127.0.0.1", debug=True)
 
 @app.route('/search_genre/<genre>')
 def search_genre(genre):
