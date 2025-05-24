@@ -205,7 +205,7 @@ class TestApp(unittest.TestCase):
         statement = "Please enter a valid type: author, title, district, or state."
         self.assertIn(statement, response.data)
 
-    def page_not_found(self):
+    def test_page_not_found(self):
         '''
         Arguments: none
         Returns: a list of the most banned books
@@ -217,7 +217,7 @@ class TestApp(unittest.TestCase):
         response = client_one.get('/invalid', follow_redirects=True)
         self.assertIn(b'Page not found', response.data)
 
-    def error_handler(self):
+    def test_error_handler(self):
         '''
         Arguments: none
         Returns: a list of the most banned books
