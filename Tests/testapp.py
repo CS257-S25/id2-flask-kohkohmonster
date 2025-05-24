@@ -13,9 +13,6 @@ class TestApp(unittest.TestCase):
     '''
    This class tests all the aspects of the app for banned books.
     '''
-    def __init__(self):
-        self.app = app.test_client()  # This is an instance attribute, initialized in __init__
-        # ... other instance attributes ..
     def test_homepage(self):
         '''
         This is a test for the homepage of the app.
