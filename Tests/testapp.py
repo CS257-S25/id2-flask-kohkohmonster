@@ -1,17 +1,17 @@
-import unittest
-from app import app
-
-class TestApp(unittest.TestCase):
-    '''
+'''
     This class tests the app.py file.
     It tests the functions in the app.py file.
     It tests the homepage function and the most_banned_category function.
     It tests the most_banned_authors function, the most_banned_titles function,
     the most_banned_districts function, and the most_banned_states function.
     It tests the search_genre function.
-    '''
-    def __init__(self, app):
-        self.app = app.test_client()  # This is an instance attribute, initialized in __init__
+'''
+import unittest
+from app import app_flask
+
+class TestApp(unittest.TestCase):
+    def __init__(self):
+        self.app = app_flask.test_client()  # This is an instance attribute, initialized in __init__
         # ... other instance attributes ..
     def test_homepage(self):
         response = self.app.get('/', follow_redirects=True)
@@ -82,7 +82,13 @@ class TestApp(unittest.TestCase):
         '''
 
         response = self.app.get('/most_banned/state/5', follow_redirects=True)
-        self.assertIn(b'Florida: 6533Iowa: 3685Texas: 1964Pennsylvania: 664Wisconsin: 480', response.data)
+        one = "Florida: 6533"
+        two = "Iowa: 3685"
+        three = "Texas: 1964"
+        four = "Pennsylvania: 664"
+        five = "Wisconsin: 480"
+        states = one + two + three + four + five
+        self.assertIn(states.encode('utf-8'), response.data)
 
     def test_invalid_type(self):
         '''
