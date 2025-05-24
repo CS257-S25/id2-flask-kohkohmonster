@@ -7,11 +7,11 @@
     It tests the search_genre function.
 '''
 import unittest
-from app import app_flask
+from app import app
 
 class TestApp(unittest.TestCase):
     def __init__(self):
-        self.app = app_flask.test_client()  # This is an instance attribute, initialized in __init__
+        self.app = app.test_client()  # This is an instance attribute, initialized in __init__
         # ... other instance attributes ..
     def test_homepage(self):
         response = self.app.get('/', follow_redirects=True)
