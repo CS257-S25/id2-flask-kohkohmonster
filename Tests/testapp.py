@@ -34,7 +34,13 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/title/5', follow_redirects=True)
-        self.assertIn(b'Looking for Alaska: 135Nineteen Minutes: 126The Perks of Being a Wallflower: 118Sold: 116Thirteen Reasons Why: 112', response.data)
+        one = "Looking for Alaska: 135"
+        two = "Nineteen Minutes: 126"
+        three = "The Perks of Being a Wallflower: 118"
+        four = "Sold: 116"
+        five = "Thirteen Reasons Why: 112"
+        client = one+two+three+four+five
+        self.assertIn(client.encode('utf-8'), response.data)
 
     def test_most_banned_districts(self):
         '''
@@ -46,7 +52,13 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/district/5', follow_redirects=True)
-        self.assertIn(b'Escambia County Public Schools: 1787Clay County School District: 864Orange County Public Schools: 734North East Independent School District: 606Central York School District: 443', response.data)
+        one = "Escambia County Public Schools: 1787"
+        two = "Clay County School District: 864"
+        three = "Orange County Public Schools: 734"
+        four = "North East Independent School District: 606"
+        five = "Central York School District: 443"
+        district = one+two+three+four+five
+        self.assertIn(district.encode('utf-8'), response.data)
 
     def test_most_banned_states(self):
         '''
