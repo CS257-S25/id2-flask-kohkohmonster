@@ -180,3 +180,42 @@ class TestApp(unittest.TestCase):
         client_one = app.test_client()
         response = client_one.get('/most_banned/author/!@#$', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
+    
+    def test_search_genre(self):
+        '''
+        Arguments: none
+        Returns: a list of the most banned books
+        This function takes in a genre and returns the books of that genre.
+        '''
+        client_one = app.test_client()
+        response = client_one.get('/search_genre/Fiction', follow_redirects=True)
+        one = "The Hate U Give"
+        two = "Looking for Alaska"
+        three = "Thirteen Reasons Why"
+        four = "The Perks of Being a Wallflower"
+        five = "Sold"
+        genre = one+two+three+four+five
+        self.assertIn(genre.encode('utf-8'), response.data)
+
+    def test_invalid_genre(self):
+        '''
+        Arguments: none
+        Returns: a list of the most banned books
+        This function takes in a genre and returns the books of that genre.
+        This is meant to be an edge case.
+        '''
+        client_one = app.test_client()
+        response = client_one.get('/search_genre/123', follow_redirects=True)
+        self.assertIn(b'Please enter a valid genre.', response.data)
+
+    def most_banned_category(self):
+        '''
+        Arguments: none
+        Returns: a list of the most banned books
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
+        '''
+        client_one = app.test_client()
+        response = client_one.get('/most_banned/author/5', follow_redirects=True)
+        self.assertIn(b'Please enter a valid type: author, title, district, or state.', response.data)
