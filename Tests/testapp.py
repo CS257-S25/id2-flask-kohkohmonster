@@ -10,10 +10,18 @@ import unittest
 from app import app
 
 class TestApp(unittest.TestCase):
+    '''
+   This class tests all the aspects of the app for banned books.
+    '''
     def __init__(self):
         self.app = app.test_client()  # This is an instance attribute, initialized in __init__
         # ... other instance attributes ..
     def test_homepage(self):
+        '''
+        This is a test for the homepage of the app.
+        '''
+
+        self.app = app.test_client()
         response = self.app.get('/', follow_redirects=True)
         one = "Enter the URL /most_banned/<type>/<num>"
         two = "to see the most banned books of a certain type."
@@ -30,6 +38,7 @@ class TestApp(unittest.TestCase):
         This function takes in an author name and a number and returns
         the most banned books of that author.
         '''
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/5', follow_redirects=True)
         one = "Ellen Hopkins: 791"
         two = "Sarah J. Maas: 657"
@@ -46,7 +55,7 @@ class TestApp(unittest.TestCase):
         This function takes in a title name and a number and returns
         the most banned books of that title.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/title/5', follow_redirects=True)
         one = "Looking for Alaska: 135"
         two = "Nineteen Minutes: 126"
@@ -63,7 +72,7 @@ class TestApp(unittest.TestCase):
         This function takes in a district name and a number and returns
         the district with the most banned books.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/district/5', follow_redirects=True)
         one = "Escambia County Public Schools: 1787"
         two = "Clay County School District: 864"
@@ -80,7 +89,7 @@ class TestApp(unittest.TestCase):
         This function takes in a state name and a number and returns
         the state with the most banned books.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/state/5', follow_redirects=True)
         one = "Florida: 6533"
         two = "Iowa: 3685"
@@ -98,7 +107,7 @@ class TestApp(unittest.TestCase):
         the most banned books of that type.
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/invalid/5', follow_redirects=True)
         self.assertIn(b'Please enter a valid type: author, title, district, or state.',
                       response.data)
@@ -111,7 +120,7 @@ class TestApp(unittest.TestCase):
         returns the most banned books of that type. 
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/0', follow_redirects=True)
         self.assertIn(b'Please enter a number greater than 0.', response.data)
 
@@ -123,7 +132,7 @@ class TestApp(unittest.TestCase):
         the most banned books of that type. 
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/-1', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
 
@@ -135,7 +144,7 @@ class TestApp(unittest.TestCase):
         the most banned books of that type.
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/abc', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
 
@@ -147,7 +156,7 @@ class TestApp(unittest.TestCase):
         the most banned books of that type.
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/5.5', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
 
@@ -159,7 +168,7 @@ class TestApp(unittest.TestCase):
         the most banned books of that type.
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/abc', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
 
@@ -171,6 +180,6 @@ class TestApp(unittest.TestCase):
         returns the most banned books of that type.
         This is meant to be an edge case.
         '''
-
+        self.app = app.test_client()
         response = self.app.get('/most_banned/author/!@#$', follow_redirects=True)
         self.assertIn(b'Please enter a valid number.', response.data)
