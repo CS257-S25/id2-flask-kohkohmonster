@@ -205,7 +205,7 @@ class TestApp(unittest.TestCase):
         statement = "Please enter a valid type: author, title, district, or state."
         self.assertIn(statement, response.data)
 
-    def page_not_found(self):
+    def test_page_not_found(self):
         '''
         Arguments: none
         Returns: a list of the most banned books
@@ -217,14 +217,32 @@ class TestApp(unittest.TestCase):
         response = client_one.get('/invalid', follow_redirects=True)
         self.assertIn(b'Page not found', response.data)
 
-    def error_handler(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        client_one = app.test_client()
-        response = client_one.get('/invalid', follow_redirects=True)
-        self.assertIn(b'Page not found', response.data)
+    def test_most_banned_valid_district(self):
+        '''Test district category with valid input'''
+        response = self.client.get('/most_banned/district/3')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Escambia County Public Schools', response.data)
+
+    def test_most_banned_valid_state(self):
+        '''Test state category with valid input'''
+        response = self.client.get('/most_banned/state/3')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Florida', response.data)
+
+    def test_search_genre_valid(self):
+        '''Test valid genre input'''
+        response = self.client.get('/search_genre/fiction')
+        self.assertEqual(response.status_code, 200)
+        # Add assertion for expected data format
+
+    def test_search_genre_empty_string(self):
+        '''Test empty genre parameter'''
+        response = self.client.get('/search_genre/')
+        self.assertEqual(response.status_code, 404)  # Now handled by 404
+
+    def test_500_error_internal_server_error(self):
+        '''Test 500 error handling'''
+        # Force an error in an existing route
+        response = self.client.get('/most_banned/author/throw_error')
+        self.assertEqual(response.status_code, 500)
+        self.assertIn(b'500', response.data)
