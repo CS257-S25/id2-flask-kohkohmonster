@@ -96,6 +96,18 @@ class TestApp(unittest.TestCase):
         states = one + two + three + four + five
         self.assertIn(states.encode('utf-8'), response.data)
 
+    def test_most_banned_category(self):
+        '''
+        Arguments: none
+        Returns: a list of the most banned books
+        This function takes in a type and a number and returns
+        the most banned books of that type.
+        This is meant to be an edge case.
+        '''
+        client_one = app.test_client()
+        response = client_one.get('/most_banned/author/5', follow_redirects=True)
+        self.assertIn(b'Please enter a valid type: author, title, district, or state.', response.data)
+
     def test_invalid_type(self):
         '''
         Arguments: none
@@ -215,7 +227,7 @@ class TestApp(unittest.TestCase):
         response = client_one.get('/search_genre/', follow_redirects=True)
         self.assertIn(b'Please enter a valid genre.', response.data)
 
-        def page_not_found(self):
+    def test_page_not_found(self):
             '''
             Arguments: none
             Returns: a list of the most banned books
@@ -227,7 +239,7 @@ class TestApp(unittest.TestCase):
             response = client_one.get('/invalid', follow_redirects=True)
             self.assertIn(b'Page not found', response.data)
 
-        def error_handler(self):
+    def test_error_handler(self):
             '''
             Arguments: none
             Returns: a list of the most banned books
