@@ -5,7 +5,7 @@ It allows users to select a type of data
 (author, title, district, or state) and the number of items to display.
 '''
 
-from flask import Flask
+from flask import Flask, render_template
 from ProductionCode import most_banned
 from ProductionCode import search
 
@@ -17,10 +17,10 @@ def homepage():
     This is the homepage where the user can select a link to another webpage.
     '''
     one = "Enter the URL /most_banned/<type>/<num>"
-    two = "\nto see the most banned books of a certain type."
-    three = "\nA type is one of the following categories: author, title, district, or state."
-    four = "\nA num is a number that represents how many of that type one wants to see."
-    five = "\nFor example, /most_banned/author/5 will show the 5 most banned authors."
+    two = "to see the most banned books of a certain type."
+    three = "A type is one of the following categories: author, title, district, or state."
+    four = "A num is a number that represents how many of that type one wants to see."
+    five = "For example, /most_banned/author/5 will show the 5 most banned authors."
     return_statement = one + two + three + four + five
 
     return return_statement
@@ -31,6 +31,20 @@ def most_banned_category(category, num):
     This function takes in a type and a number and returns the most banned books of that type.
     '''
 
+    if num == None:
+        return "Please enter a number greater than 0."
+    try:
+        # This checks if the type is a string.
+        if not isinstance(category, str):
+            return "Please enter a valid type: author, title, district, or state."
+        # This checks if the type is empty.
+        if category == "":
+            return "Please enter a valid type: author, title, district, or state."
+        # This checks if the type is a string and the number is an integer greater than 0.
+        if not num.isdigit():
+            return "Please enter a valid number."
+    except:
+        return "Please enter a valid number."
     number = int(num)
     # This checks if the type is a string and the number is an integer greater than 0.
     if number < 1:
@@ -73,3 +87,24 @@ def search_genre(genre):
     # This grabs the books of the genre.
     matching_books = search.search_genre(genre)
     return matching_books
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """The endpoint for the 404 error
+    Args:
+        _error (Exception): the error that was raised
+    Returns:
+        (str): 404: Sorry page not found with usage instructions
+    """
+    return render_template("error.html", error=error, code=404)
+
+@app.errorhandler(500)
+def python_bug(error):
+    """The endpoint for the 500 error
+    Args:
+        _error (Exception): the error that was raised
+    Returns:
+        (str): 500: Bad Request
+    """
+    print(error)
+    return render_template("error.html", error=error, code=500)
