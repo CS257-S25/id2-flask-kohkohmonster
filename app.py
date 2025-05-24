@@ -31,19 +31,16 @@ def most_banned_category(category, num):
     This function takes in a type and a number and returns the most banned books of that type.
     '''
 
-    if num == None:
+    if num is None:
         return "Please enter a number greater than 0."
     try:
         # This checks if the type is a string.
-        if not isinstance(category, str):
-            return "Please enter a valid type: author, title, district, or state."
-        # This checks if the type is empty.
-        if category == "":
+        if not isinstance(category, str) or category == "":
             return "Please enter a valid type: author, title, district, or state."
         # This checks if the type is a string and the number is an integer greater than 0.
         if not num.isdigit():
             return "Please enter a valid number."
-    except:
+    except ValueError:
         return "Please enter a valid number."
     number = int(num)
     # This checks if the type is a string and the number is an integer greater than 0.
@@ -63,7 +60,7 @@ def most_banned_category(category, num):
         most_banned_type = most_banned.most_banned_states(number)
     # This is the default case if the type is not one of the above.
     else:
-        return "Please enter a valid type: author, title, district, or state."
+        most_banned_type = "Please enter a valid type: author, title, district, or state."
     return most_banned_type
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
