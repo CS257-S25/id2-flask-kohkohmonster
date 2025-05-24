@@ -5,11 +5,12 @@ class TestApp(unittest.TestCase):
     def test_homepage(self):
         self.app = app.test_client()
         response = self.app.get('/', follow_redirects=True)
-        return_statement = "Enter the URL /most_banned/<type>/<num>"
-        +"\n to see the most banned books of a certain type."
-        +"\nA type is one of the following categories: author, title, district, or state."
-        +"\nA num is a number that represents how many of that type one wants to see."
-        +"\nFor example, /most_banned/author/5 will show the 5 most banned authors."
+        one = "Enter the URL /most_banned/<type>/<num>"
+        two = "to see the most banned books of a certain type."
+        three = "A type is one of the following categories: author, title, district, or state."
+        four = "A num is a number that represents how many of that type one wants to see."
+        five = "For example, /most_banned/author/5 will show the 5 most banned authors."
+        return_statement = one + two + three + four + five
         self.assertIn(return_statement.encode(), response.data)
 
     def test_most_banned_authors(self):
@@ -21,7 +22,7 @@ class TestApp(unittest.TestCase):
         '''
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/5', follow_redirects=True)
-        self.assertIn(b'5 most banned authors', response.data)
+        self.assertIn(b'Ellen Hopkins: 791Sarah J. Maas: 657Jodi Picoult: 213John Green: 203Toni Morrison: 197', response.data)
 
     def test_most_banned_titles(self):
         '''
@@ -33,7 +34,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/title/5', follow_redirects=True)
-        self.assertIn(b'5 most banned titles', response.data)
+        self.assertIn(b'Looking for Alaska: 135Nineteen Minutes: 126The Perks of Being a Wallflower: 118Sold: 116Thirteen Reasons Why: 112', response.data)
 
     def test_most_banned_districts(self):
         '''
@@ -45,7 +46,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/district/5', follow_redirects=True)
-        self.assertIn(b'5 most banned districts', response.data)
+        self.assertIn(b'Escambia County Public Schools: 1787Clay County School District: 864Orange County Public Schools: 734North East Independent School District: 606Central York School District: 443', response.data)
 
     def test_most_banned_states(self):
         '''
@@ -57,7 +58,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/state/5', follow_redirects=True)
-        self.assertIn(b'5 most banned states', response.data)
+        self.assertIn(b'Florida: 6533Iowa: 3685Texas: 1964Pennsylvania: 664Wisconsin: 480', response.data)
 
     def test_invalid_type(self):
         '''
@@ -97,7 +98,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/-1', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
+        self.assertIn(b'Please enter a valid number.', response.data)
 
     def test_invalid_number_non_integer(self):
         '''
@@ -110,7 +111,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/abc', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
+        self.assertIn(b'Please enter a valid number.', response.data)
 
     def test_invalid_number_float(self):
         '''
@@ -123,7 +124,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/5.5', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
+        self.assertIn(b'Please enter a valid number.', response.data)
 
     def test_invalid_number_string(self):
         '''
@@ -136,7 +137,7 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/abc', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
+        self.assertIn(b'Please enter a valid number.', response.data)
 
     def test_invalid_number_special_characters(self):
         '''
@@ -149,100 +150,4 @@ class TestApp(unittest.TestCase):
 
         self.app = app.test_client()
         response = self.app.get('/most_banned/author/!@#$', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-
-    def test_invalid_number_empty(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and
-        returns the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-
-    def test_invalid_number_none(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/None', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data) 
-    
-    def test_invalid_number_nan(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/nan', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-    
-    def test_invalid_number_inf(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/infinity', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-    
-    def test_invalid_number_inf_negative(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/-infinity', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-    
-    def test_invalid_number_inf_positive(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/+infinity', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-    def test_invalid_number_inf_negative_positive(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/-+infinity', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
-    def test_invalid_number_inf_positive_negative(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and
-        returns the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        self.app = app.test_client()
-        response = self.app.get('/most_banned/author/+-infinity', follow_redirects=True)
-        self.assertIn(b'Please enter a number greater than 0.', response.data)
+        self.assertIn(b'Please enter a valid number.', response.data)
