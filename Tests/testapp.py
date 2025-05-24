@@ -202,7 +202,8 @@ class TestApp(unittest.TestCase):
         '''
         client_one = app.test_client()
         response = client_one.get('/most_banned/author/5', follow_redirects=True)
-        self.assertIn(b'Please enter a valid type: author, title, district, or state.', response.data)
+        statement = "Please enter a valid type: author, title, district, or state."
+        self.assertIn(statement, response.data)
 
     def page_not_found(self):
         '''
