@@ -21,9 +21,9 @@ class TestApp(unittest.TestCase):
         client_one = app.test_client()
         response = client_one.get('/', follow_redirects=True)
         one = "Enter the URL /most_banned/<type>/<num>"
-        two = "to see the most banned books of a certain type."
-        three = "A type is one of the following categories: author, title, district, or state."
-        four = "A num is a number that represents how many of that type one wants to see."
+        two = "to see the most banned books of a certain type. /br"
+        three = "A type is one of the following categories: author, title, district, or state. /br"
+        four = "A num is a number that represents how many of that type one wants to see. /br"
         five = "For example, /most_banned/author/5 will show the 5 most banned authors."
         return_statement = one + two + three + four + five
         self.assertIn(return_statement.encode(), response.data)
