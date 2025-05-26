@@ -77,15 +77,15 @@ def search_genre(genre):
     matching_books = search.search_genre(genre)
     return matching_books
 
-@app.errorhandler(404)
+@app.errorhandler(500)
 def page_not_found(e):
-    """The endpoint for the 404 error
+    """The endpoint for the 500 error
     Args:
         _error (Exception): the error that was raised
     Returns:
-        (str): 404: Sorry page not found with usage instructions
+        (str): 500: Sorry page not found with usage instructions
     """
-    return "404: Sorry page not found."+e, 404
+    return "500: Sorry page not found."+e, 500
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
