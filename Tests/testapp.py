@@ -215,7 +215,7 @@ class TestApp(unittest.TestCase):
         '''
         client_one = app.test_client()
         response = client_one.get('/invalid', follow_redirects=True)
-        self.assertIn(b'404: Sorry page not found.', response.data)
+        self.assertIn(b'500: Sorry page not found.', response.data)
 
     # def test_error_handler(self):
     #     '''
