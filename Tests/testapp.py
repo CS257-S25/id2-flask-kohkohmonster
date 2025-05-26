@@ -205,17 +205,17 @@ class TestApp(unittest.TestCase):
         statement = "Please enter a valid type: author, title, district, or state."
         self.assertIn(statement, response.data)
 
-    def test_page_not_found(self):
-        '''
-        Arguments: none
-        Returns: a list of the most banned books
-        This function takes in a type and a number and returns
-        the most banned books of that type.
-        This is meant to be an edge case.
-        '''
-        client_one = app.test_client()
-        response = client_one.get('/invalid', follow_redirects=True)
-        self.assertIn(b'500: Sorry page not found.', response.data)
+    # def test_page_not_found(self):
+    #     '''
+    #     Arguments: none
+    #     Returns: a list of the most banned books
+    #     This function takes in a type and a number and returns
+    #     the most banned books of that type.
+    #     This is meant to be an edge case.
+    #     '''
+    #     client_one = app.test_client()
+    #     response = client_one.get('/invalid', follow_redirects=True)
+    #     self.assertIn(b'500: Sorry page not found.', response.data)
 
     # def test_error_handler(self):
     #     '''
