@@ -78,7 +78,7 @@ def search_genre(genre):
     return matching_books
 
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(error):
     """The endpoint for the 404 error
     Args:
         _error (Exception): the error that was raised
