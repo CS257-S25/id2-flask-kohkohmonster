@@ -30,9 +30,6 @@ def most_banned_category(category, num):
     '''
     This function takes in a type and a number and returns the most banned books of that type.
     '''
-
-    if num is None:
-        return "Please enter a number greater than 0."
     try:
         # This checks if the type is a string.
         if not isinstance(category, str) or category == "":
@@ -92,17 +89,6 @@ def page_not_found(error):
         (str): 404: Sorry page not found with usage instructions
     """
     return "404: Sorry page not found.", 404
-
-@app.errorhandler(500)
-def python_bug(error):
-    """The endpoint for the 500 error
-    Args:
-        _error (Exception): the error that was raised
-    Returns:
-        (str): 500: Bad Request
-    """
-    print(error)
-    return "500: Bad Request", 500
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
