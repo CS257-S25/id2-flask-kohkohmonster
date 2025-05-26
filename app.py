@@ -67,10 +67,10 @@ def search_genre(genre):
     if not isinstance(genre, str):
         return "Please enter a valid genre."
     # This checks if the genre is empty.
-    elif genre == "":
+    if genre == "":
         return "Please enter a valid genre."
     # This checks if the genre is a string and the number is an integer greater than 0.
-    elif genre.isdigit():
+    if genre.isdigit():
         return "Please enter a valid genre."
 
     # This grabs the books of the genre.
@@ -78,7 +78,7 @@ def search_genre(genre):
     return matching_books
 
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found():
     """The endpoint for the 404 error
     Args:
         _error (Exception): the error that was raised
