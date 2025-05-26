@@ -85,7 +85,7 @@ def page_not_found(error):
     Returns:
         (str): 404: Sorry page not found with usage instructions
     """
-    return "404: Sorry page not found.", 404, error
+    return "404: Sorry page not found.", 404
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", debug=True)
