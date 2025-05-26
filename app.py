@@ -5,7 +5,7 @@ It allows users to select a type of data
 (author, title, district, or state) and the number of items to display.
 '''
 
-from flask import Flask, render_template
+from flask import Flask
 from ProductionCode import most_banned
 from ProductionCode import search
 
