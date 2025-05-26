@@ -62,8 +62,6 @@ def most_banned_category(category, num):
     else:
         most_banned_type = "Please enter a valid type: author, title, district, or state."
     return most_banned_type
-if __name__ == '__main__':
-    app.run(host="127.0.0.1", debug=True)
 
 @app.route('/search_genre/<genre>')
 def search_genre(genre):
@@ -75,10 +73,10 @@ def search_genre(genre):
     if not isinstance(genre, str):
         return "Please enter a valid genre."
     # This checks if the genre is empty.
-    if genre == "":
+    elif genre == "":
         return "Please enter a valid genre."
     # This checks if the genre is a string and the number is an integer greater than 0.
-    if genre.isdigit():
+    elif genre.isdigit():
         return "Please enter a valid genre."
 
     # This grabs the books of the genre.
@@ -93,7 +91,7 @@ def page_not_found(error):
     Returns:
         (str): 404: Sorry page not found with usage instructions
     """
-    return render_template("error.html", error=error, code=404)
+    return "404: Sorry page not found.", 404
 
 @app.errorhandler(500)
 def python_bug(error):
@@ -104,4 +102,7 @@ def python_bug(error):
         (str): 500: Bad Request
     """
     print(error)
-    return render_template("error.html", error=error, code=500)
+    return "500: Bad Request", 500
+
+if __name__ == '__main__':
+    app.run(host="127.0.0.1", debug=True)
