@@ -228,7 +228,6 @@ class TestApp(unittest.TestCase):
         client_one = app.test_client()
         response = client_one.get('/invalid', follow_redirects=True)
         self.assertIn(b'Page not found', response.data)
-    
     def test_search_genre(self):
         '''
         Arguments: none
