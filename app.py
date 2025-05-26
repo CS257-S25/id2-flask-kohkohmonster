@@ -31,9 +31,6 @@ def most_banned_category(category, num):
     This function takes in a type and a number and returns the most banned books of that type.
     '''
     try:
-        # This checks if the type is a string.
-        if not isinstance(category, str) or category == "":
-            return "Please enter a valid type: author, title, district, or state."
         # This checks if the type is a string and the number is an integer greater than 0.
         if not num.isdigit():
             return "Please enter a valid number."
