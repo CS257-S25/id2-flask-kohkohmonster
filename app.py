@@ -16,7 +16,7 @@ def homepage():
     '''
     This is the homepage where the user can select a link to another webpage.
     '''
-    one = "Enter the URL /most_banned/<type>/<num>, "
+    one = "Enter the URL /most_banned/<type>/<num> "
     two = "to see the most banned books of a certain type. /br"
     three = "A type is one of the following categories: author, title, district, or state. /br"
     four = "A num is a number that represents how many of that type one wants to see. /br"
